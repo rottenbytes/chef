@@ -1,1 +1,15 @@
 My chef related stuff
+=====================
+
+utils : nothing fancy, just tools
+ohai : ohai stuff/plugins
+
+The RAID ohai plugin
+====================
+
+Distribute it following : http://wiki.opscode.com/display/chef/Distributing+Ohai+Plugins
+And then data is available under node[:raid][:devices] in your recipes.
+
+
+
+
