@@ -6,7 +6,7 @@
 
 require 'ohai'
 
-module Fotolia
+module OhaiUtils
   class DumpOhai
 
     def initialize(target)
