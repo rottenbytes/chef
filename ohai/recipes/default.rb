@@ -18,30 +18,29 @@
 #
 
 Ohai::Config[:plugin_path] << node.ohai.plugin_path
-Chef::Log.info("ohai plugins will be at: #{node.ohai.plugin_path}")
+Chef::Log.debug("ohai plugins will be at: #{node.ohai.plugin_path}")
 
-d = directory node.ohai.plugin_path do
-  owner 'root'
-  group case node[:os]
-    when "freebsd" then 'wheel'
-    else 'root'
-  end
-  mode 0755
-  recursive true
+package "dmidecode" do
   action :nothing
-end
+end.run_action(:install)
 
-d.run_action(:create)
+if node[:platform] == 'debian' then
+  debian_packages=[ "lsb-release" ]
+
+  debian_packages.each do |pkg|
+    package pkg do
+      action :nothing
+    end.run_action(:install)
+  end
+end
 
 rd = remote_directory node.ohai.plugin_path do
   source 'plugins'
-  owner 'root'
-  group case node[:os]
-    when "freebsd" then 'wheel'
-    else 'root'
-  end
+  owner 0
+  group 0
   mode 0755
   action :nothing
+  purge true
 end
 
 rd.run_action(:create)
@@ -49,3 +48,4 @@ rd.run_action(:create)
 o = Ohai::System.new
 o.all_plugins
 node.automatic_attrs.merge! o.data
+
