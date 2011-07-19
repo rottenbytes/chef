@@ -37,6 +37,7 @@ indexes.each { |i|
   data=Hash.new
   data[:pciid]=re_id.match(lines[i])[1]
   data[:vendor]=re_vendor.match(lines[i+1])[1]
+  data[:subvendor]=re_vendor.match(lines[i+1])[1]
   data[:fulldescription] = re_device.match(lines[i+2])[1]
   devices.push(data)
 }
