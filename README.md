@@ -23,4 +23,13 @@ Makes node[:lsb][:distcodename] available (tested under debian)
 The Ohai report handler
 =======================
 
-Untested yet, meant to be used with mcollective.
+Useless. Use the ohai fact source plugin from mcollective. left for educational purpose
+
+The async report handler
+========================
+
+* async_handler.rb : the report handler itself.
+* configfile.erb : the template for the configuration file of the report handler.
+* recipe.rb : the deployment recipe, meant to be used with the opscode chef_handler cookbook.
+* consumer.rb : simple queue consumer, drops to standard output.
+
